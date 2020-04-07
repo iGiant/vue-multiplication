@@ -114,18 +114,19 @@ new Vue({
             });
         },
         verify() {
-            let length = this.examples.length, 
-                result = this.examples[length-1];
-            if (result.answer == answer[length-1]) {
+            let length = this.examples.length
+                last = length-1, 
+                result = this.examples[last];
+            if (result.answer == answer[last]) {
                 result.btnClass = btnSuccess;
                 result.btnCaption = "Правильно";
             } else {
                 result.btnClass = btnError;
-                result.btnCaption = result.example + " " + answer[length-1];
+                result.btnCaption = result.example + " " + answer[last];
                 this.error++;
             }
             result.inputDisabled = true;
-            if (this.examples.length < this.quantity) {
+            if (length < this.quantity) {
                 this.examples.push(getExpression(this.limit, this.divChecked))
                 this.$nextTick(() => {
                     this.$refs['input_'+length][0].focus();
